@@ -6,4 +6,8 @@ import { Injectable } from '@angular/core';
 export class NumberHelperService {
 
   constructor() { }
+
+  public isNumeric(str: string) {
+    return !isNaN(Number(str));
+  }
 }

@@ -1,4 +1,5 @@
 import {Component, OnInit} from '@angular/core';
+import {NumberHelperService} from "../../service/number-helper.service";
 
 @Component({
   selector: 'app-calculator',
@@ -7,16 +8,22 @@ import {Component, OnInit} from '@angular/core';
 })
 export class CalculatorComponent implements OnInit {
   input: string = '';
-  buttons: string[] = ['7', '8', '9', '+', '4', '5', '6', '-', '1', '2', '3', '*', '<-', '0', '=', '\\'];
+  buttons: string[] = [
+    '7', '8', '9', '+', '4', '5', '6', '-', '1', '2', '3', '*', '<-', '0', '=', '\\'
+  ];
 
-  constructor() { }
+  private operands: string[] = [1, 2, 3, 4, 5, 6, 7, 8, 9, 0]
+    .map(value => value.toString());
 
-  onButtonClick(value: string): void {
-    this.input += value;
-  }
+  private operators: string[] = ['+', '-', '\\', '*'];
+
+  private lastValue: string = '';
+  private command: string = '';
+
+  constructor(private numberHelperService: NumberHelperService) { }
 
   getButtonClass(value: string) {
-    if(this.isNumeric(value)) {
+    if(this.numberHelperService.isNumeric(value)) {
       return 'operand';
     }
 
@@ -27,8 +34,40 @@ export class CalculatorComponent implements OnInit {
     return 'operator';
   }
 
-  private isNumeric(str: string) {
-    return !isNaN(parseFloat(str))
+  onButtonClick(value: string): void {
+
+    if(this.operands.includes(value)) {
+      this.operandClick(value);
+    } else if(this.operators.includes(value)) {
+      this.operatorClick(value);
+    } else if(value === '<-') {
+      this.backspaceClick();
+    } else if(value === '=') {
+      this.calculateAnswer();
+    }
+  }
+
+  private operandClick(value: string) {
+    this.input += value;
+  }
+
+  private operatorClick(value: string) {
+    this.lastValue = this.input;
+    this.input = '';
+    this.command = value;
+  }
+
+  calculateAnswer() {
+    this.input = eval(this.lastValue + this.command + this.input);
+  }
+
+  private backspaceClick() {
+
+    if(this.input.length === 0) {
+      return;
+    }
+
+    this.input = this.input.slice(0, -1);
   }
 
   ngOnInit(): void {
