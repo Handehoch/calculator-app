@@ -7,6 +7,8 @@ import {NumberHelperService} from "../../service/number-helper.service";
   styleUrls: ['./calculator.component.css']
 })
 export class CalculatorComponent implements OnInit {
+  // Не нравится, что дополнительные данные хранятся в компоненте
+
   input: string = '';
   buttons: string[] = [
     '7', '8', '9', '+', '4', '5', '6', '-', '1', '2', '3', '*', '<-', '0', '=', '\\'
@@ -23,6 +25,7 @@ export class CalculatorComponent implements OnInit {
   constructor(private numberHelperService: NumberHelperService) { }
 
   getButtonClass(value: string) {
+
     if(this.numberHelperService.isNumeric(value)) {
       return 'operand';
     }
@@ -34,6 +37,7 @@ export class CalculatorComponent implements OnInit {
     return 'operator';
   }
 
+  //Не нравится куча ифов
   onButtonClick(value: string): void {
 
     if(this.operands.includes(value)) {
@@ -44,22 +48,36 @@ export class CalculatorComponent implements OnInit {
       this.backspaceClick();
     } else if(value === '=') {
       this.calculateAnswer();
+    } else if(value === 'Clear') {
+      this.clearAll();
     }
   }
 
+
+  clearAll() {
+
+    this.command = '';
+    this.input = '';
+    this.lastValue = '';
+  }
+
+  private calculateAnswer() {
+
+    this.input = eval(this.lastValue + this.command + this.input);
+  }
+
   private operandClick(value: string) {
+
     this.input += value;
   }
 
   private operatorClick(value: string) {
+
     this.lastValue = this.input;
     this.input = '';
     this.command = value;
   }
 
-  calculateAnswer() {
-    this.input = eval(this.lastValue + this.command + this.input);
-  }
 
   private backspaceClick() {
 

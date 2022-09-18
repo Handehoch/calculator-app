@@ -45,3 +45,14 @@
   font-family: "Open Sans", sans-serif;
   font-size: 20px;
 }
+
+.clear-button {
+  grid-column: 1/4;
+  display: inline-grid;
+  height: 50px;
+  text-align: center;
+  justify-content: center;
+  align-items: center;
+  font-family: "Open Sans", sans-serif;
+  font-size: 20px;
+}
