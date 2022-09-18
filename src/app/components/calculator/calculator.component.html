@@ -1,1 +1,14 @@
-<p>calculator works!</p>
+<div class="input-container">
+  <label>
+    <input class="input-label" type="text" placeholder="" [(ngModel)]="input">
+  </label>
+</div>
+
+<div class="main-calculator">
+
+  <button *ngFor="let button of this.buttons;"
+          [ngClass]="getButtonClass(button)"
+          (click)="onButtonClick(button)"
+  >{{button}}</button>
+
+</div>
