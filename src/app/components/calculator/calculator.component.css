@@ -1,3 +1,5 @@
+/*разобраться с стилями, по возмонжноости объеденить некоторые из них в одни классы*/
+
 .input-container {
   align-items: center;
   text-align: center;
@@ -47,7 +49,7 @@
 }
 
 .clear-button {
-  grid-column: 1/4;
+  grid-column: 1/5;
   display: inline-grid;
   height: 50px;
   text-align: center;
