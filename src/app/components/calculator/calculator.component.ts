@@ -1,6 +1,7 @@
 import {Component, Input, OnInit} from '@angular/core';
 import {DataStorageService} from "../../services/data-storage.service";
 import {ErrorService} from "../../services/error.service";
+import {CalculationService} from "../../services/calculation.service";
 
 @Component({
   selector: 'app-calculator',
@@ -17,7 +18,8 @@ export class CalculatorComponent implements OnInit {
 
   constructor(
     private dataStorageService: DataStorageService,
-    private errorService: ErrorService
+    private errorService: ErrorService,
+    private calculationService: CalculationService
   ) { }
 
   getButtonClass(value: string) {
@@ -84,7 +86,7 @@ export class CalculatorComponent implements OnInit {
   }
 
   private calculateAnswer() {
-    this.input = eval(this.lastValue + this.command + this.input);
+    this.input = this.calculationService.handleOperation(this.lastValue, this.input, this.command);
   }
 
   ngOnInit(): void {
