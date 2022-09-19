@@ -1,8 +1,13 @@
 <div class="input-container">
   <label>
-    <input class="input-label" type="text" placeholder="" [(ngModel)]="input">
+    <input class="input-label"
+           type="text" placeholder=""
+           [(ngModel)]="input"
+           (change)="validateInput()">
   </label>
 </div>
+
+<app-input-error></app-input-error>
 
 <div class="main-calculator">
 

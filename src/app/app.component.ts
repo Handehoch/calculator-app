@@ -1,4 +1,5 @@
 import { Component } from '@angular/core';
+import {DataStorageService} from "./services/data-storage.service";
 
 @Component({
   selector: 'app-root',
@@ -8,7 +9,8 @@ import { Component } from '@angular/core';
 export class AppComponent {
   title = 'angular calculator';
 
-  buttons: string[] = [
-    '7', '8', '9', '+', '4', '5', '6', '-', '1', '2', '3', '*', '<-', '0', '=', '/'
-  ];
+  buttons: string[] = this.dataStorageService.buttons;
+
+  constructor(private dataStorageService: DataStorageService) {
+  }
 }

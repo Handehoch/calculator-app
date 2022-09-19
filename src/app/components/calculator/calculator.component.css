@@ -1,3 +1,4 @@
+/*TO-DO*/
 /*разобраться с стилями, по возмонжноости объеденить некоторые из них в одни классы*/
 
 .input-container {
@@ -23,7 +24,7 @@
   grid-gap: 3px;
 }
 
-.arithmetic-symbols {
+.arithmetic-symbol {
   display: inline-grid;
   width: 60px;
   height: 50px;
@@ -57,7 +58,7 @@
   color: black;
 }
 
-.arithmetic-symbols:hover {
+.arithmetic-symbol:hover {
   background-color: black;
   color: aliceblue;
 }
