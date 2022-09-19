@@ -12,6 +12,8 @@
   font-size: 20px;
   width: 240px;
   height: 25px;
+  border-color: black;
+  font-weight: 550;
 }
 
 .main-calculator {
@@ -21,7 +23,7 @@
   grid-gap: 3px;
 }
 
-.operand {
+.arithmetic-symbols {
   display: inline-grid;
   width: 60px;
   height: 50px;
@@ -30,24 +32,18 @@
   align-items: center;
   font-family: "Open Sans", sans-serif;
   font-size: 20px;
-}
-
-.operator {
-  display: inline-grid;
-  width: 60px;
-  height: 50px;
-  text-align: center;
-  justify-content: center;
-  align-items: center;
-  font-family: "Open Sans", sans-serif;
-  font-size: 20px;
+  background-color: bisque;
+  color: black;
 }
 
 .backspace {
   font-family: "Open Sans", sans-serif;
   font-size: 20px;
+  background-color: bisque;
+  color: black;
 }
 
+/*почему начинается в первой и заканчивается в пятой, если их 4*/
 .clear-button {
   grid-column: 1/5;
   display: inline-grid;
@@ -57,4 +53,21 @@
   align-items: center;
   font-family: "Open Sans", sans-serif;
   font-size: 20px;
+  background-color: bisque;
+  color: black;
+}
+
+.arithmetic-symbols:hover {
+  background-color: black;
+  color: aliceblue;
+}
+
+.backspace:hover {
+  background-color: black;
+  color: aliceblue;
+}
+
+.clear-button:hover {
+  background-color: black;
+  color: aliceblue;
 }

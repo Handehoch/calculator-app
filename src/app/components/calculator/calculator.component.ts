@@ -1,5 +1,4 @@
-import {Component, OnInit} from '@angular/core';
-import {NumberHelperService} from "../../service/number-helper.service";
+import {Component, Input, OnInit} from '@angular/core';
 
 @Component({
   selector: 'app-calculator',
@@ -10,31 +9,25 @@ export class CalculatorComponent implements OnInit {
   // Не нравится, что дополнительные данные хранятся в компоненте
 
   input: string = '';
-  buttons: string[] = [
-    '7', '8', '9', '+', '4', '5', '6', '-', '1', '2', '3', '*', '<-', '0', '=', '/'
-  ];
+  @Input() buttons: string[] = [];
 
-  private operands: string[] = [1, 2, 3, 4, 5, 6, 7, 8, 9, 0]
-    .map(value => value.toString());
-
+  private operands: string[] = [1, 2, 3, 4, 5, 6, 7, 8, 9, 0].map(value => value.toString());
   private operators: string[] = ['+', '-', '/', '*'];
 
   private lastValue: string = '';
   private command: string = '';
 
-  constructor(private numberHelperService: NumberHelperService) { }
+  constructor() { }
 
+
+  //тут тоже не нравится, что сравниваю в лоб строки
   getButtonClass(value: string) {
-
-    if(this.numberHelperService.isNumeric(value)) {
-      return 'operand';
-    }
 
     if(value === '<-') {
       return 'backspace';
     }
 
-    return 'operator';
+    return 'arithmetic-symbols';
   }
 
   //Не нравится куча ифов
@@ -53,26 +46,18 @@ export class CalculatorComponent implements OnInit {
     }
   }
 
-
   clearAll() {
-
     this.command = '';
     this.input = '';
     this.lastValue = '';
   }
 
-  private calculateAnswer() {
-
-    this.input = eval(this.lastValue + this.command + this.input);
-  }
 
   private operandClick(value: string) {
-
     this.input += value;
   }
 
   private operatorClick(value: string) {
-
     this.lastValue = this.input;
     this.input = '';
     this.command = value;
@@ -88,8 +73,11 @@ export class CalculatorComponent implements OnInit {
     this.input = this.input.slice(0, -1);
   }
 
+  private calculateAnswer() {
+    this.input = eval(this.lastValue + this.command + this.input);
+  }
+
   ngOnInit(): void {
 
   }
-
 }
